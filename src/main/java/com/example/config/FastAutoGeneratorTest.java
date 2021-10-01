@@ -81,7 +81,7 @@ public class FastAutoGeneratorTest {
                         .xml("mapper.xml")//Mapper XML 包名，默认值:mapper.xml
                         .controller("controller")//Controller 包名，默认值:controller
                         //.other("other")//自定义文件包名,	输出自定义文件时所用到的包名
-                        .pathInfo(Collections.singletonMap(OutputFile.mapperXml, "E://pathInfo")) //路径配置信息，Collections.singletonMap(OutputFile.mapperXml, "D://")
+                        .pathInfo(Collections.singletonMap(OutputFile.mapperXml, "src/main/resources/mapper")) //路径配置信息，Collections.singletonMap(OutputFile.mapperXml, "D://")
                         .build()//加入构建队列
                 )
 
@@ -125,8 +125,8 @@ public class FastAutoGeneratorTest {
                         /** 设置需要生成的表名 */
                         .addInclude("t_user_login")// 增加表匹配(内存过滤)，include 与 exclude 只能配置一项
                         /** 前缀配置*/
-                        .addTablePrefix("t_", "c_")//增加过滤表前缀
-                        .addFieldSuffix("_flag")//增加过滤表后缀
+                        .addTablePrefix("t_")//增加过滤表前缀
+                        .addFieldSuffix("_")//增加过滤表后缀
                         .addFieldPrefix("t_")//增加过滤字段前缀
                         .addFieldSuffix("t_")//增加过滤字段后缀
                         /** 策略配置 */
@@ -145,7 +145,7 @@ public class FastAutoGeneratorTest {
                         .addTableFills(new Column("create_time", FieldFill.INSERT))//添加表字段填充
                         .addTableFills(new Property("updateTime", FieldFill.INSERT_UPDATE))//添加表字段填充
                         .idType(IdType.AUTO)//全局主键类型
-                        .formatFileName("%sEntity")//格式化文件名称
+                        .formatFileName("%sBean")//格式化文件名称
                         //.nameConvert(INameConvert)//名称转换实现
                         //.versionColumnName("version")//乐观锁字段名(数据库)
                         //.versionPropertyName("version")//乐观锁属性名(实体)
@@ -160,10 +160,10 @@ public class FastAutoGeneratorTest {
                         .superClass(BaseController.class)
                         .enableHyphenStyle()
                         .enableRestStyle()
-                        .formatFileName("%sAction")
+                        .formatFileName("%sController")
                         .serviceBuilder()//service 策略配置
                         .formatServiceFileName("%sService")
-                        .formatServiceImplFileName("%sServiceImp")
+                        .formatServiceImplFileName("%sServiceImpl")
 
                         /** mapper 策略配置 */
                         .mapperBuilder()//
@@ -171,8 +171,8 @@ public class FastAutoGeneratorTest {
                         .enableMapperAnnotation()
                         .enableBaseResultMap()
                         .enableBaseColumnList()
-                        .formatMapperFileName("%sDao")
-                        .formatXmlFileName("%sXml")
+                        .formatMapperFileName("%sMapper")
+                        .formatXmlFileName("%sMapper")
                         .build()//加入构建队列
                 )
 
