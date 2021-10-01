@@ -14,4 +14,8 @@
         ul_id, ul_username, ul_password
     </sql>
 
+    <!-- 查找用户信息 -->
+    <select id="findAllUser" resultType="com.example.entity.User_loginBean">
+        select * from t_user_login
+    </select>
 </mapper>

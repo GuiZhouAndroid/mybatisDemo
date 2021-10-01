@@ -58,7 +58,13 @@
             <version>1.18.20</version>
             <scope>provided</scope>
         </dependency>
-
+        <!-- junit测试单元 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
         <!--阿里 JSON-->
         <dependency>
             <groupId>com.alibaba</groupId>

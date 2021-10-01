@@ -1,14 +1,12 @@
 package com.example.controller;
 
 
-import com.example.entity.User_loginBean;
+import com.example.JsonResult;
 import com.example.service.User_loginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
-import com.example.common.entity.BaseController;
 
 import java.util.List;
 
@@ -22,11 +20,11 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user-login-bean")
-public class User_loginController extends BaseController {
+public class User_loginController {
     @Autowired
     User_loginService userLoginService;
-    @PostMapping("/findAllUser")
-    public List<User_loginBean> findAllUser(){
-        return userLoginService.findAllUser();
+    @RequestMapping("/findAllUser")
+    public JsonResult<Object> findAllUser(){
+        return new JsonResult<>(userLoginService.getById(1),"查询成功");
     }
 }

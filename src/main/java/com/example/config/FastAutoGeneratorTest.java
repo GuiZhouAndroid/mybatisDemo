@@ -10,9 +10,7 @@ package com.example.config;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
@@ -22,15 +20,12 @@ import com.baomidou.mybatisplus.generator.config.po.LikeTable;
 import com.baomidou.mybatisplus.generator.config.querys.MySqlQuery;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import com.baomidou.mybatisplus.generator.engine.BeetlTemplateEngine;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import com.baomidou.mybatisplus.generator.fill.Column;
 import com.baomidou.mybatisplus.generator.fill.Property;
 import com.baomidou.mybatisplus.generator.keywords.MySqlKeyWordsHandler;
-import com.example.common.entity.BaseController;
 
 import java.util.Collections;
-import java.util.Scanner;
 
 /**
  * <p>
@@ -157,7 +152,6 @@ public class FastAutoGeneratorTest {
 
                         /** controller 策略配置 */
                         .controllerBuilder()//
-                        .superClass(BaseController.class)
                         .enableHyphenStyle()
                         .enableRestStyle()
                         .formatFileName("%sController")

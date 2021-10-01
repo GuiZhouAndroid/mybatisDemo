@@ -19,10 +19,10 @@ import java.util.List;
  */
 @Service
 public class User_loginServiceImpl extends ServiceImpl<User_loginMapper, User_loginBean> implements User_loginService {
-    @Autowired
-    private User_loginMapper userLoginMapper;
-    @Override
-    public List<User_loginBean> findAllUser() {
-        return userLoginMapper.findAllUser();
-    }
+//    @Autowired
+//    private User_loginMapper userLoginMapper;
+//    @Override
+//    public List<User_loginBean> findAllUser() {
+//        return userLoginMapper.findAllUser();
+//    }
 }

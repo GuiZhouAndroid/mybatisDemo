@@ -22,8 +22,8 @@ import org.springframework.context.annotation.Configuration;
  * 配置分页插件
  *
  */
-//@Configuration
-//@MapperScan("com.baomidou.cloud.service.*.mapper*")
+@Configuration
+@MapperScan("com.baomidou.cloud.service.*.mapper*")
 public class MybatisPlusConfig {
 
 //    // 旧版

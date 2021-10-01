@@ -14,5 +14,5 @@ import java.util.List;
  * @since 2021-10-01
  */
 public interface User_loginService extends IService<User_loginBean> {
-    public List<User_loginBean> findAllUser();
+//    public List<User_loginBean> findAllUser();
 }

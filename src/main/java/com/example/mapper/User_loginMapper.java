@@ -3,6 +3,7 @@ package com.example.mapper;
 import com.example.entity.User_loginBean;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -16,5 +17,5 @@ import java.util.List;
  */
 @Mapper
 public interface User_loginMapper extends BaseMapper<User_loginBean> {
-    public List<User_loginBean> findAllUser();
+//     List<User_loginBean> findAllUser();
 }
