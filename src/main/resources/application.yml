@@ -1,0 +1,31 @@
+# SpringBoot资源配置
+spring:
+  datasource:
+    name: testdb  #数据库名
+    url: jdbc:mysql://localhost:3306/testdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC #url
+    username: root  #用户名
+    password: root  #密码
+    driver-class-name: com.mysql.cj.jdbc.Driver  #数据库链接驱动
+#    jackson:
+#      date-format: yyyy-MM-dd HH:mm:ss
+#      time-zone: GMT+8
+#      serialization:
+#        write-dates-as-timestamps: false
+# SpringBoot服务配置
+server:
+  port: 8085   # 重定向转发443端口：https://域名
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: full
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  global-config:
+    # 逻辑删除配置
+    db-config:
+      # 删除前
+      logic-not-delete-value: 1
+      # 删除后
+      logic-delete-value: 0
+
