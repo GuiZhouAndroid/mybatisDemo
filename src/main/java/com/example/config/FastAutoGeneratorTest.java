@@ -61,7 +61,7 @@ public class FastAutoGeneratorTest {
                 // 全局配置
                 .globalConfig((scanner, builder) -> builder
                         .fileOverride() //覆盖已生成文件，默认值:false
-                        .outputDir("E://mybatis_log") //指定输出目录，默认值: windows:D://
+                        .outputDir(System.getProperty("user.dir") + "/src/main/java") //指定输出目录，默认值: windows:D://
                         .author(scanner.apply("请输入开发者名称："))//作者名，baomidou 默认值:作者
                         .dateType(DateType.TIME_PACK)//时间策略，DateType.ONLY_DATE 默认值: DateType.TIME_PACK
                         .commentDate("yyyy-MM-dd")//注释日期，默认值: yyyy-MM-dd
@@ -184,7 +184,7 @@ public class FastAutoGeneratorTest {
                 //Beetl
                 //.templateEngine(new BeetlTemplateEngine())
                 //Freemarker
-//                .templateEngine(new FreemarkerTemplateEngine())
+                .templateEngine(new FreemarkerTemplateEngine())
                 /**
                  * 开始自动生成代码,执行队列构建操作
                  */
