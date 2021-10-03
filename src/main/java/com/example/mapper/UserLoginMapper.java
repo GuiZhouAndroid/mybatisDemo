@@ -1,6 +1,6 @@
 package com.example.mapper;
 
-import com.example.model.TUserLogin;
+import com.example.entity.UserLoginBean;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,10 +11,10 @@ import java.util.List;
  * 用户登录表 Mapper 接口
  * </p>
  *
- * @author astupidcoder
- * @since 2021-09-30
+ * @author ZSAndroid
+ * @since 2021-10-03
  */
 @Mapper
-public interface TUserLoginMapper extends BaseMapper<TUserLogin> {
-    public List<TUserLogin> findAllUser();
+public interface UserLoginMapper extends BaseMapper<UserLoginBean> {
+    List<UserLoginBean> findAllUser();
 }
