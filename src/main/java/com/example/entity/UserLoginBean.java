@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -20,23 +19,30 @@ import java.io.Serializable;
  * </p>
  *
  * @author ZSAndroid
- * @since 2021-10-01
+ * @since 2021-10-03
  */
-@Data
+@Getter
+@Setter
 @Accessors(chain = true)
 @TableName("t_user_login")
-@ApiModel(value = "User_loginBean对象", description = "用户登录表")
-public class User_loginBean extends Model<User_loginBean> {
+@ApiModel(value = "UserLoginBean对象", description = "用户登录表")
+public class UserLoginBean extends Model<UserLoginBean> {
 
     @ApiModelProperty("登录自增ID")
     @TableId(value = "ul_id", type = IdType.AUTO)
-    private Integer ul_id;
+    private Integer ulId;
 
     @ApiModelProperty("登录名")
     @TableField("ul_username")
-    private String ul_username;
+    private String ulUsername;
 
     @ApiModelProperty("登录密码")
     @TableField("ul_password")
-    private String ul_password;
+    private String ulPassword;
+
+    //自动生成的pkVal()可以删除
+    @Override
+    public Serializable pkVal() {
+        return this.ulId;
+    }
 }

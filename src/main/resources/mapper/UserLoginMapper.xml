@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserLoginMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.entity.UserLoginBean">
+        <id column="ul_id" property="ulId" />
+        <result column="ul_username" property="ulUsername" />
+        <result column="ul_password" property="ulPassword" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ul_id, ul_username, ul_password
+    </sql>
+    <!-- 查询全部用户信息,t_user_login：是我MySQL数据中的用户登录表，可以改为自己的 -->
+    <select id="findAllUser" resultType="com.example.entity.UserLoginBean">
+        select * from t_user_login
+    </select>
+
+</mapper>

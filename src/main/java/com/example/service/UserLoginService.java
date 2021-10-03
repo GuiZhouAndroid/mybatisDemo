@@ -1,6 +1,6 @@
 package com.example.service;
 
-import com.example.entity.User_loginBean;
+import com.example.entity.UserLoginBean;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -11,8 +11,8 @@ import java.util.List;
  * </p>
  *
  * @author ZSAndroid
- * @since 2021-10-01
+ * @since 2021-10-03
  */
-public interface User_loginService extends IService<User_loginBean> {
-//    public List<User_loginBean> findAllUser();
+public interface UserLoginService extends IService<UserLoginBean> {
+    List<UserLoginBean> findAllUser();
 }

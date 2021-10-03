@@ -1,9 +1,8 @@
 package com.example.mapper;
 
-import com.example.entity.User_loginBean;
+import com.example.entity.UserLoginBean;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -13,9 +12,9 @@ import java.util.List;
  * </p>
  *
  * @author ZSAndroid
- * @since 2021-10-01
+ * @since 2021-10-03
  */
 @Mapper
-public interface User_loginMapper extends BaseMapper<User_loginBean> {
-//     List<User_loginBean> findAllUser();
+public interface UserLoginMapper extends BaseMapper<UserLoginBean> {
+    List<UserLoginBean> findAllUser();
 }

@@ -1,6 +1,4 @@
-package com.example.config;
-
-/**
+package com.example.config; /**
  * created by on 2021/10/1
  * 描述：快速自动生成代码配置类
  *
@@ -8,7 +6,7 @@ package com.example.config;
  * @create 2021-10-01-11:34
  */
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
@@ -21,8 +19,6 @@ import com.baomidou.mybatisplus.generator.config.querys.MySqlQuery;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
-import com.baomidou.mybatisplus.generator.fill.Column;
-import com.baomidou.mybatisplus.generator.fill.Property;
 import com.baomidou.mybatisplus.generator.keywords.MySqlKeyWordsHandler;
 
 import java.util.Collections;
@@ -32,8 +28,8 @@ import java.util.Collections;
  * 快速生成
  * </p>
  *
- * @author lanjerry
- * @since 2021-09-16
+ * @author ZSAndroid
+ * @create 2021-10-1-10:08
  */
 public class FastAutoGeneratorTest {
 
@@ -121,26 +117,25 @@ public class FastAutoGeneratorTest {
                         .addInclude("t_user_login")// 增加表匹配(内存过滤)，include 与 exclude 只能配置一项
                         /** 前缀配置*/
                         .addTablePrefix("t_")//增加过滤表前缀
-                        .addFieldSuffix("_")//增加过滤表后缀
-                        .addFieldPrefix("t_")//增加过滤字段前缀
-                        .addFieldSuffix("t_")//增加过滤字段后缀
-                        /** 策略配置 */
+                        //.addFieldSuffix("_")//增加过滤表后缀
+                        //.addFieldPrefix("ul_")//增加过滤字段前缀  本人不建议使用，去掉后缀，会导致驼峰命名实体类的变量名不带前缀，去掉后,错误：Username，正确:ulUsername
+                        //.addFieldSuffix("_")//增加过滤字段后缀
+
+                        /** 实体策略配置 */
                         .entityBuilder()//实体策略配置
-                        //.superClass(BaseEntity.class)//设置父类
                         .disableSerialVersionUID()//禁用生成 serialVersionUID，默认值:true
                         .enableLombok()//开启 lombok 模型，默认值:false
                         .enableChainModel()//开启链式模型，默认值:false
                         .enableRemoveIsPrefix()//开启 Boolean 类型字段移除 is 前缀，默认值:false
                         .enableTableFieldAnnotation()//开启生成实体时生成字段注解，默认值:false
                         .enableActiveRecord()//开启 ActiveRecord 模型，默认值:false
-                        .naming(NamingStrategy.no_change)//数据库表映射到实体的命名策略，默认下划线转驼峰命名:NamingStrategy.underline_to_camel
-                        .columnNaming(NamingStrategy.underline_to_camel)//数据库表字段映射到实体的命名策略，默认为 null，未指定按照 naming 执行
-                        .addSuperEntityColumns("id", "created_by", "created_time", "updated_by", "updated_time")//添加父类公共字段
-                        .addIgnoreColumns("age")//添加忽略字段
-                        .addTableFills(new Column("create_time", FieldFill.INSERT))//添加表字段填充
-                        .addTableFills(new Property("updateTime", FieldFill.INSERT_UPDATE))//添加表字段填充
+                        .naming(NamingStrategy.underline_to_camel)//数据库表映射到实体的命名策略，默认下划线转驼峰命名:NamingStrategy.underline_to_camel
+                        .columnNaming(NamingStrategy.underline_to_camel)//数据库表字段映射到实体属性的命名策略，默认为 null，未指定按照 naming 执行
                         .idType(IdType.AUTO)//全局主键类型
-                        .formatFileName("%sBean")//格式化文件名称
+                        .formatFileName("%sBean")//格式化文件名称，生成实体的后缀，建议这样使用，生成后：UserLoginBean
+                        //.superClass(BaseEntity.class)//设置父类
+                        //.enableColumnConstant()//开启生成字段常量，默认值:false
+                        //.addIgnoreColumns("age")//添加忽略字段
                         //.nameConvert(INameConvert)//名称转换实现
                         //.versionColumnName("version")//乐观锁字段名(数据库)
                         //.versionPropertyName("version")//乐观锁属性名(实体)
@@ -151,22 +146,24 @@ public class FastAutoGeneratorTest {
                         //.notLikeTable(new LikeTable("USER"))//模糊表排除(sql 过滤)	likeTable 与 notLikeTable 只能配置一项
 
                         /** controller 策略配置 */
-                        .controllerBuilder()//
-                        .enableHyphenStyle()
-                        .enableRestStyle()
-                        .formatFileName("%sController")
+                        .controllerBuilder()//controller 策略配置
+                        .enableHyphenStyle()//开启驼峰转连字符，默认值:false
+                        .enableRestStyle()//开启生成@RestController 控制器，默认值:false
+                        .formatFileName("%sController")//格式化文件名称——controller包下自动生成的类后缀，例如UserLoginController
+
+                        /** Service 策略配置 */
                         .serviceBuilder()//service 策略配置
-                        .formatServiceFileName("%sService")
-                        .formatServiceImplFileName("%sServiceImpl")
+                        .formatServiceFileName("%sService")//转换 service 接口文件名称，例如：UserLoginService
+                        .formatServiceImplFileName("%sServiceImpl")//转换 service 实现类文件名称，例如：UserLoginServiceImpl
 
                         /** mapper 策略配置 */
-                        .mapperBuilder()//
-                        .superClass(BaseMapper.class)
-                        .enableMapperAnnotation()
-                        .enableBaseResultMap()
-                        .enableBaseColumnList()
-                        .formatMapperFileName("%sMapper")
-                        .formatXmlFileName("%sMapper")
+                        .mapperBuilder()//mapper 策略配置
+                        .superClass(BaseMapper.class)//设置父类，BaseMapper是com.baomidou.mybatisplus.core.mapper中的
+                        .enableMapperAnnotation()//开启 @Mapper 注解，默认值:false
+                        .enableBaseResultMap()//启用 BaseResultMap 生成，默认值:false
+                        .enableBaseColumnList()//启用 BaseColumnList，默认值:false
+                        .formatMapperFileName("%sMapper")//转换 mapper 接口文件名称后缀，mapper目录下的，例如：UserLoginMapper（有@Mapper）
+                        .formatXmlFileName("%sMapper")//转换 xml 文件名称后缀，例如：UserLoginMapper.xml，Mybatis的xml映射文件
                         .build()//加入构建队列
                 )
 
