@@ -45,4 +45,14 @@ public class UserLoginBean extends Model<UserLoginBean> {
     public Serializable pkVal() {
         return this.ulId;
     }
+
+    /**
+     * 有参构造初始化用户对象数据
+     * @param ulUsername 用户名
+     * @param ulPassword 密码
+     */
+    public UserLoginBean(String ulUsername, String ulPassword) {
+        this.ulUsername = ulUsername;
+        this.ulPassword = ulPassword;
+    }
 }
