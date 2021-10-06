@@ -55,4 +55,15 @@ public class UserLoginBean extends Model<UserLoginBean> {
         this.ulUsername = ulUsername;
         this.ulPassword = ulPassword;
     }
+
+    /**
+     * @param ulId 自增ID
+     * @param ulUsername 用户名
+     * @param ulPassword 密码
+     */
+    public UserLoginBean(Integer ulId, String ulUsername, String ulPassword) {
+        this.ulId = ulId;
+        this.ulUsername = ulUsername;
+        this.ulPassword = ulPassword;
+    }
 }

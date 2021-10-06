@@ -1,9 +1,12 @@
 package com.example.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.example.entity.UserLoginBean;
 import com.example.service.UserLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -22,24 +25,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/user-login-bean")
 public class UserLoginController {
-    /** 常规写法：Spring容器中查询对应类型的bean，然后根据名称来查找资源 */
+    /** 常规写法：Spring容器中查询对应类型的bean，根据名称来查找资源 */
     @Autowired
     UserLoginService userLoginService;
 
-    //浏览器访问 http://localhost:8085/user-login-bean/getUserById
-    @RequestMapping("/getUserById")
-    public UserLoginBean getUserById(){
-        //getById是mybatis-plus封装好的，通过ID值，查找映射表中的信息
-        return userLoginService.getById(1);
-    }
-    //浏览器访问 http://localhost:8085/user-login-bean/findAllUser
-    @RequestMapping("/findAllUser")
-    public List<UserLoginBean> findAllUser(){
-        //findAllUser() 是自定义的SQL查询映射方法——查询t_user_login表中全部用户信息
-        return userLoginService.findAllUser();
-    }
+    /** *********************************   添加用户数据   **************************************/
 
-    /** 添加一条用户数据 */
+    /** 添加一条用户信息 */
     //浏览器访问 http://localhost:8085/user-login-bean/addOnceUserInfo
     @RequestMapping("/addOnceUserInfo")
     public boolean addOnceUserInfo(){
@@ -47,7 +39,7 @@ public class UserLoginController {
         return userLoginService.save(new UserLoginBean("添加的用户名","添加的密码"));
     }
 
-    /** 批量添加用户数据 */
+    /** 批量添加用户信息 */
     //浏览器访问 http://localhost:8085/user-login-bean/addBatchUserInfo
     @RequestMapping("/addBatchUserInfo")
     public boolean addBatchUserInfo(){
@@ -58,5 +50,65 @@ public class UserLoginController {
         //saveBatch()是mybatis-plus封装好的，批量添加数据使用，接受集合对象，因此上面把两个用户数据添加至集合
         //提供给saveBatch()使用，就实现批量添加功能，返回boolean类型，true为批量添加成功，反之false批量添加失败
         return userLoginService.saveBatch(userList,1);
+    }
+
+    /** 注解TableId()——更新And添加用户信息 */
+    //浏览器访问 http://localhost:8085/user-login-bean/addSaveOrUpdateUserInfo/qe用户名/qe密码
+    @RequestMapping("/addSaveOrUpdateUserInfo/{username}/{password}")
+    //username 和 password 的值，从URL中获取
+    public boolean addSaveOrUpdateUserInfo(@PathVariable("username") String username,@PathVariable("password") String password){
+        //创建更新条件构造器对象
+        UpdateWrapper<UserLoginBean> updateWrapper = new UpdateWrapper<>();
+        //eq 等于："ul_userName"（用户名）为"admin"的用户信息存在就更新记录为"qe用户名"，不存在就添加一条用户名记录"admin"
+        //eq 等于："ul_password"（密码）为"admin"的用户信息存在就更新记录"qe密码"，不存在就添加一条密码记录"admin"
+        updateWrapper.eq("ul_username","admin");
+        updateWrapper.eq("ul_password","admin");
+        //saveOrUpdate()是mybatis-plus封装好的，需要实体类自增ID使用 注解@TableId()，
+        //第一个参数是：实体对象数据，第二个参数是：更新条件构造器对象，返回布尔类型
+        return userLoginService.saveOrUpdate(new UserLoginBean("操作后"+username,"操作后"+password),updateWrapper);
+    }
+
+    /** 根据ID值，批量更新或添加用户信息,为更好演示批量操作，示例：更新2条，添加2条 */
+    //浏览器访问 http://localhost:8085/user-login-bean/addSaveOrUpdateBatchUserInfo
+    @RequestMapping("/addSaveOrUpdateBatchUserInfo")
+    public boolean addSaveOrUpdateBatchUserInfo(){
+        //创建List集合，装载批量数据
+        List<UserLoginBean> userList = new ArrayList<>();
+        /** 已存在更新情况2条 */
+        // id = 1 对应用户信息——用户名："操作后qe用户名"  密码："操作后qe密码"（这条ID为1的用户数据是已经存在的，存在即执行更新）
+        userList.add(new UserLoginBean(1,"1更新后qe用户名","1更新后qe密码"));
+        // id = 1 对应用户信息——用户名："root"  密码："root"（这条ID为2的用户数据是已经存在的，存在即执行更新）
+        userList.add(new UserLoginBean(2,"2更新后root","2更新后qe密码"));
+        /** 不存在添加情况2条 */
+        // id = 50 对应用户信息——用户名：无  密码：无（这条ID为50的用户数据不存在——添加数据）
+        userList.add(new UserLoginBean(50,"50添加用户名","50添加密码"));
+        // id = 100 对应用户信息——用户名：无  密码：无（这条ID为100的用户数据不存在——添加数据）
+        userList.add(new UserLoginBean(100,"100添加用户名","100添加密码"));
+        //返回布尔类型的执行结果
+        return userLoginService.saveOrUpdateBatch(userList);
+    }
+
+
+    /** *********************************   删除用户数据   **************************************/
+
+
+    /** *********************************   修改用户数据   **************************************/
+
+    /** *********************************   查询用户数据   **************************************/
+
+    /** 通过ID值，查询用户全部信息 */
+    //浏览器访问 http://localhost:8085/user-login-bean/getUserById
+    @RequestMapping("/getUserById")
+    public UserLoginBean getUserById(){
+        //getById是mybatis-plus封装好的，通过ID值，查找映射表中的信息
+        return userLoginService.getById(1);
+    }
+
+    /** 查询全部用户信息 */
+    //浏览器访问 http://localhost:8085/user-login-bean/findAllUser
+    @RequestMapping("/findAllUser")
+    public List<UserLoginBean> findAllUser(){
+        //findAllUser() 是自定义的SQL查询映射方法——查询t_user_login表中全部用户信息
+        return userLoginService.findAllUser();
     }
 }
