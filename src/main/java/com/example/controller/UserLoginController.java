@@ -20,6 +20,9 @@ import java.util.List;
  * 用户登录表 前端控制器
  * </p>
  *
+ * UpdateWrapper：实体对象封装操作类
+ * QueryWrapper：实体包装类
+ *
  * @author ZSAndroid
  * @since 2021-10-03
  */
@@ -150,6 +153,19 @@ public class UserLoginController {
     }
 
     /** *********************************   修改用户数据   **************************************/
+
+    /** 通过主键ID，批量删除用户信息 */
+    //浏览器访问 http://localhost:8085/user-login-bean/updateUserInfo
+    @RequestMapping("/updateUserInfo")
+    public Boolean updateUserInfo(){
+        UpdateWrapper<UserLoginBean> updateWrapper = new UpdateWrapper<>();
+        updateWrapper
+                .eq("ul_username","root")
+                .eq("ul_password","root")
+                .setSql("ul_username = 'updateUsername',ul_password = 'updatePassword'");
+        //返回布尔类型
+        return userLoginService.update(updateWrapper);
+    }
 
     /** *********************************   查询用户数据   **************************************/
 
