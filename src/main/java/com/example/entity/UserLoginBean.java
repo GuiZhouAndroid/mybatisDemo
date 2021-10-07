@@ -48,6 +48,14 @@ public class UserLoginBean extends Model<UserLoginBean> {
 
     /**
      * 有参构造初始化用户对象数据
+     * @param ulId 用户实体对象ID
+     */
+    public UserLoginBean(Integer ulId) {
+        this.ulId = ulId;
+    }
+
+    /**
+     * 有参构造初始化用户对象数据
      * @param ulUsername 用户名
      * @param ulPassword 密码
      */
@@ -57,7 +65,8 @@ public class UserLoginBean extends Model<UserLoginBean> {
     }
 
     /**
-     * @param ulId 自增ID
+     * 有参构造初始化用户对象数据
+     * @param ulId 用户实体对象ID
      * @param ulUsername 用户名
      * @param ulPassword 密码
      */

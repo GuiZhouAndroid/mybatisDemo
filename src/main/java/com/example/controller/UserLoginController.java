@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -91,6 +92,62 @@ public class UserLoginController {
 
     /** *********************************   删除用户数据   **************************************/
 
+    /** 通过主键ID值，删除用户信息 */
+    //浏览器访问 http://localhost:8085/user-login-bean/deleteUserInfoById
+    @RequestMapping("/deleteUserInfoById")
+    public Boolean deleteUserInfoById(){
+        //removeById()是mybatis-plus封装好的，通过主键ID值，删除ID值为100的用户信息，返回布尔类型
+        return userLoginService.removeById(100);
+    }
+
+    /** 通过实体对象ID值，删除用户信息，此方式演示与上面效果相似，省略演示 */
+    //浏览器访问 http://localhost:8085/user-login-bean/deleteUserInfoByEntityId
+    @RequestMapping("/deleteUserInfoByEntityId")
+    public Boolean deleteUserInfoByEntityId(){
+        //removeById()是mybatis-plus封装好的，通过实体对象ID值，删除ID值为5的用户信息，返回布尔类型
+        return userLoginService.removeById(new UserLoginBean(5));
+    }
+
+    /** 通过实体对象条件，删除用户信息 */
+    //浏览器访问 http://localhost:8085/user-login-bean/deleteUserInfoByEntity
+    @RequestMapping("/deleteUserInfoByEntity")
+    public Boolean deleteUserInfoByEntity(){
+        //创建一个QueryWrapper对象
+        QueryWrapper<UserLoginBean> queryWrapper = new QueryWrapper<>();
+        //构造查询条件：删除自增ID大于等于6的用户信息（"DELETE FROM t_user_login WHERE ul_id >= 6"）
+        queryWrapper.ge("ul_id","6");
+        //返回布尔类型
+        return userLoginService.remove(queryWrapper);
+    }
+
+    /** 通过Map集合条件，删除相应用户信息 */
+    //浏览器访问 http://localhost:8085/user-login-bean/deleteUserInfoByMap
+    @RequestMapping("/deleteUserInfoByMap")
+    public Boolean deleteUserInfoByMap() {
+        //创建Map集合，装载条件数据
+        HashMap<String, Object> hashMap = new HashMap<>();
+        //构造map查询条件，（DELETE FROM t_user_login WHERE ul_id = 2 AND ul_password = "2更新后qe密码" AND ul_username = "2更新后root"）
+        //每一个put()等同于一个MySQL的并且"AND"
+        hashMap.put("ul_id",2);
+        hashMap.put("ul_username","2更新后root");
+        hashMap.put("ul_password","2更新后qe密码");
+        //返回布尔类型
+        return userLoginService.removeByMap(hashMap);
+    }
+
+    /** 通过主键ID，批量删除用户信息 */
+    //浏览器访问 http://localhost:8085/user-login-bean/deleteBatchUserInfoByIds
+    @RequestMapping("/deleteBatchUserInfoByIds")
+    public Boolean deleteBatchUserInfoByIds(){
+        //创建List集合，装载批量数据
+        List<Integer> userLoginBeans = new ArrayList<>();
+        //把自增ID值为1、3的用户信息，放到List集合中
+        userLoginBeans.add(1);
+        userLoginBeans.add(3);
+        //根据List保存的自增ID值，执行批量删除操作【DELETE FROM t_user_login WHERE ul_id IN ( 1 , 3 )】
+        //返回布尔类型
+        return userLoginService.removeByIds(userLoginBeans);
+    }
 
     /** *********************************   修改用户数据   **************************************/
 
