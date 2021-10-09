@@ -33,11 +33,18 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.4.3.4</version>
         </dependency>
+        <!--pagehelper-->
+<!--        <dependency>-->
+<!--            <groupId>com.github.pagehelper</groupId>-->
+<!--            <artifactId>pagehelper</artifactId>-->
+<!--            <version>5.1.11</version>-->
+<!--        </dependency>-->
         <!-- 代码生成需要的包,需要freemarker支持 需排除jsqlparser依赖 否则会有分页插件jar包冲突-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
             <version>3.5.1</version>
+            <!-- pagehelper 包含该依赖存在版本冲突，因此不建议和 mp 一起混用 -->
 <!--            <exclusions>-->
 <!--                <exclusion>-->
 <!--                    <groupId>com.github.jsqlparser</groupId>-->

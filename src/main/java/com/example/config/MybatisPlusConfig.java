@@ -10,10 +10,8 @@ package com.example.config;
 
 
 import com.baomidou.mybatisplus.annotation.DbType;
-import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,4 +47,12 @@ public class MybatisPlusConfig {
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.H2));
         return interceptor;
     }
+
+    /**
+     * pagehelper的分页插件
+     */
+//    @Bean
+//    public PageInterceptor pageInterceptor() {
+//        return new PageInterceptor();
+//    }
 }
