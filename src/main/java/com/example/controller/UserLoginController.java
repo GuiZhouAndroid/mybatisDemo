@@ -62,7 +62,7 @@ public class UserLoginController {
     /** 注解TableId()——更新And添加用户信息 */
     //浏览器访问 http://localhost:8085/user-login-bean/addSaveOrUpdateUserInfo/qe用户名/qe密码
     @RequestMapping("/addSaveOrUpdateUserInfo/{username}/{password}")
-    //username 和 password 的值，从URL中获取
+    //username 和 password 的值，从URL获取
     public boolean addSaveOrUpdateUserInfo(@PathVariable("username") String username,@PathVariable("password") String password){
         //创建更新条件构造器对象
         UpdateWrapper<UserLoginBean> updateWrapper = new UpdateWrapper<>();
